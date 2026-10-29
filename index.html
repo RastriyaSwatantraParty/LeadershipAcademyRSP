@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -20,7 +19,7 @@
             --rsp-cyan: #06B6D4;
             --neon-glow: rgba(37, 99, 235, 0.4);
             
-            --glass-bg: rgba(15, 23, 42, 0.85);
+            --glass-bg: rgba(15, 23, 42, 0.88);
             --glass-card: rgba(255, 255, 255, 0.04);
             --glass-border: rgba(255, 255, 255, 0.1);
             
@@ -101,7 +100,7 @@
             100% { transform: translate(30px, 40px) scale(1.1); }
         }
 
-        /* Master Glassmorphic Container */
+        /* Master Glassmorphic Container with Background Rectangular Image (rsp.jpg) */
         .container {
             width: 100%;
             max-width: 650px;
@@ -115,7 +114,31 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            overflow: hidden;
             animation: containerEntry 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Top Centre Rectangular Background Banner Image (rsp.jpg) Overlay Style */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: url('rsp.jpg') no-repeat center top;
+            background-size: cover;
+            opacity: 0.35; /* Overlay effect so all text/content remains readable in front */
+            z-index: 0;
+            pointer-events: none;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Ensure all direct children inside container sit above the banner overlay */
+        .container > * {
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes containerEntry {
@@ -123,19 +146,19 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Award-Winning Animated Title */
+        /* Party Name Color Animation with Red and Blue Science */
         .animated-title {
             font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #818CF8 100%);
+            background: linear-gradient(90deg, #EF4444 0%, #3B82F6 50%, #EF4444 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textShine 5s linear infinite;
+            animation: redBlueShine 4s linear infinite;
             letter-spacing: -0.5px;
         }
 
-        @keyframes textShine {
+        @keyframes redBlueShine {
             to { background-position: 200% center; }
         }
 
@@ -609,7 +632,7 @@
 
     <script>
         /* -------------------------------------------------------------
-           1. WEB AUDIO API SYNTHESIZER (No External Sounds Needed)
+           1. WEB AUDIO API SYNTHESIZER
            ------------------------------------------------------------- */
         let audioCtx = null;
 
@@ -622,7 +645,6 @@
             }
         }
 
-        // Correct Option Sound: Harmonic high chime double-tone
         function playCorrectSound() {
             try {
                 initAudio();
@@ -631,8 +653,8 @@
                 const osc1 = audioCtx.createOscillator();
                 const gain1 = audioCtx.createGain();
                 osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(523.25, now); // C5
-                osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.15); // E5
+                osc1.frequency.setValueAtTime(523.25, now);
+                osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.15);
                 gain1.gain.setValueAtTime(0.3, now);
                 gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
                 osc1.connect(gain1);
@@ -643,17 +665,16 @@
                 const osc2 = audioCtx.createOscillator();
                 const gain2 = audioCtx.createGain();
                 osc2.type = 'triangle';
-                osc2.frequency.setValueAtTime(783.99, now + 0.1); // G5
+                osc2.frequency.setValueAtTime(783.99, now + 0.1);
                 gain2.gain.setValueAtTime(0.25, now + 0.1);
                 gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
                 osc2.connect(gain2);
                 gain2.connect(audioCtx.destination);
                 osc2.start(now + 0.1);
                 osc2.stop(now + 0.45);
-            } catch (e) { console.error(e); }
+            } catch (e) { }
         }
 
-        // Wrong Option Sound: Low buzz thud
         function playWrongSound() {
             try {
                 initAudio();
@@ -670,10 +691,9 @@
                 gain.connect(audioCtx.destination);
                 osc.start(now);
                 osc.stop(now + 0.3);
-            } catch (e) { console.error(e); }
+            } catch (e) { }
         }
 
-        // Firecracker Sound Burst Effect
         function playFirecrackerPop() {
             try {
                 initAudio();
@@ -733,7 +753,7 @@
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                this.vy += 0.08; // gravity
+                this.vy += 0.08;
                 this.alpha -= this.decay;
             }
             draw() {
@@ -748,7 +768,7 @@
         }
 
         function createFirework(x, y) {
-            const colors = ['#2563EB', '#06B6D4', '#60A5FA', '#F59E0B', '#10B981', '#EC4899'];
+            const colors = ['#2563EB', '#06B6D4', '#EF4444', '#F59E0B', '#10B981', '#EC4899'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             for (let i = 0; i < 35; i++) {
                 particles.push(new Particle(x, y, color));
@@ -781,10 +801,8 @@
             requestAnimationFrame(animateFireworks);
         }
 
-        // Start fireworks on load
         window.addEventListener('load', () => {
             requestAnimationFrame(animateFireworks);
-            // Stop fireworks after 3 seconds
             setTimeout(() => {
                 fireworksActive = false;
                 canvas.style.opacity = '0';
@@ -808,7 +826,6 @@
         let skipCount = 0;
         let answeredCurrent = false;
 
-        // Fallback test data in case JSON files are not yet uploaded to data/
         const fallbackQuestions = {
             1: [
                 { id: 101, q: "१. स्थानीय सरकार सञ्चालन ऐन, २०७४ नेपालको संविधानको कुन धारा बमोजिम बनेको हो?", o: ["धारा २९५ उपधारा (३)", "धारा २९६ उपधारा (१)", "धारा २१७", "धारा २२७"], a: 1, e: "संविधानको धारा २९६ (१) बमोजिमको व्यवस्थापिका-संसदले यो ऐन बनाएको हो।" },
@@ -854,7 +871,7 @@
         }
 
         function openSection(sectionNum) {
-            initAudio(); // User interaction unlocks audio context
+            initAudio();
             currentSection = sectionNum;
             const titles = {
                 1: "स्थानीय सरकार सञ्चालन ऐन २०७४",
@@ -865,7 +882,6 @@
             document.getElementById('sectionTitle').innerText = titles[sectionNum];
             updateMistakeBadge();
             
-            // Fetch JSON from data folder with fallback safeguard
             fetch(`data/${sectionNum}.json`)
                 .then(response => {
                     if (!response.ok) throw new Error("JSON file missing");
@@ -876,7 +892,6 @@
                     switchScreen('modeScreen');
                 })
                 .catch(err => {
-                    console.log("Loading fallback data for local testing...");
                     questionsData = fallbackQuestions[sectionNum] || fallbackQuestions[1];
                     switchScreen('modeScreen');
                 });
@@ -896,7 +911,6 @@
             switchScreen('modeScreen');
         }
 
-        // Shuffle utility
         function shuffleArray(array) {
             let arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -970,7 +984,7 @@
                 removeMistake(currentSection, activeQuestions[currentIndex].id);
             } else {
                 element.classList.add('wrong');
-                items[correctIndex].classList.add('correct'); // Highlight right answer
+                items[correctIndex].classList.add('correct');
                 playWrongSound();
                 wrongCount++;
                 storeMistake(currentSection, activeQuestions[currentIndex].id);
