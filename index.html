@@ -25,14 +25,6 @@
             
             --text-main: #F8FAFC;
             --text-muted: #94A3B8;
-            
-            --correct-bg: rgba(34, 197, 94, 0.18);
-            --correct-border: #22C55E;
-            --correct-text: #4ADE80;
-            
-            --wrong-bg: rgba(239, 68, 68, 0.18);
-            --wrong-border: #EF4444;
-            --wrong-text: #F87171;
 
             --skip-bg: rgba(245, 158, 11, 0.15);
             --skip-border: #F59E0B;
@@ -83,17 +75,8 @@
             opacity: 0.25;
             animation: floatOrb 10s infinite alternate ease-in-out;
         }
-        body::before {
-            background: var(--rsp-vibrant);
-            top: -50px;
-            left: -50px;
-        }
-        body::after {
-            background: var(--rsp-cyan);
-            bottom: -50px;
-            right: -50px;
-            animation-delay: -5s;
-        }
+        body::before { background: var(--rsp-vibrant); top: -50px; left: -50px; }
+        body::after { background: var(--rsp-cyan); bottom: -50px; right: -50px; animation-delay: -5s; }
 
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1); }
@@ -118,35 +101,28 @@
             animation: containerEntry 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Top Centre Rectangular Background Banner Image (rsp.jpg) Overlay Style */
+        /* Top Centre Rectangular Background Banner Image Overlay */
         .container::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
+            top: 0; left: 0; width: 100%; height: 200px;
             background: url('rsp.jpg') no-repeat center top;
             background-size: cover;
-            opacity: 0.35; /* Overlay effect so all text/content remains readable in front */
+            opacity: 0.35; 
             z-index: 0;
             pointer-events: none;
             mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
             -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
         }
 
-        /* Ensure all direct children inside container sit above the banner overlay */
-        .container > * {
-            position: relative;
-            z-index: 2;
-        }
+        .container > * { position: relative; z-index: 2; }
 
         @keyframes containerEntry {
             from { opacity: 0; transform: translateY(40px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Party Name Color Animation with Red and Blue Science */
+        /* Party Name Color Animation (Red & Blue Science) */
         .animated-title {
             font-size: 1.8rem;
             font-weight: 800;
@@ -158,9 +134,7 @@
             letter-spacing: -0.5px;
         }
 
-        @keyframes redBlueShine {
-            to { background-position: 200% center; }
-        }
+        @keyframes redBlueShine { to { background-position: 200% center; } }
 
         .subtitle {
             font-size: 0.9rem;
@@ -172,7 +146,7 @@
             opacity: 0.9;
         }
 
-        /* High-End Glowing Circle Photo */
+        /* Profile Photo */
         .profile-container {
             margin: 22px auto;
             position: relative;
@@ -184,362 +158,187 @@
             box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
             animation: profileGlow 4s ease-in-out infinite alternate;
         }
-
         @keyframes profileGlow {
             0% { transform: translateY(0); box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
             100% { transform: translateY(-6px); box-shadow: 0 0 35px rgba(6, 182, 212, 0.6); }
         }
-
-        .profile-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background: #111;
-        }
+        .profile-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background: #111; }
 
         /* Social Links */
-        .social-quick-links {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            margin-bottom: 25px;
-        }
-
+        .social-quick-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 25px; }
         .social-btn {
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            padding: 10px 20px; font-size: 0.85rem; font-weight: 700; border-radius: 50px;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;
         }
-
         .fb-btn { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .wa-btn { background: linear-gradient(135deg, #059669, #047857); }
+        .social-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5); }
 
-        .social-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
-        }
-
-        /* Menu Grid (4 Main Buttons) */
-        .menu-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
+        /* Main Menu Buttons */
+        .menu-grid { display: flex; flex-direction: column; gap: 14px; }
         .menu-btn {
-            width: 100%;
-            padding: 18px 22px;
-            background: var(--glass-card);
-            color: var(--text-main);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            font-size: 1.02rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: left;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            width: 100%; padding: 18px 22px; background: var(--glass-card); color: var(--text-main);
+            border: 1px solid var(--glass-border); border-radius: 20px; font-size: 1.02rem; font-weight: 700;
+            cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); transition: all 0.35s ease; position: relative; overflow: hidden;
         }
-
         .menu-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 6px; height: 100%;
-            background: linear-gradient(to bottom, var(--rsp-vibrant), var(--rsp-cyan));
-            transition: width 0.3s ease;
+            content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%;
+            background: linear-gradient(to bottom, var(--rsp-vibrant), var(--rsp-cyan)); transition: width 0.3s ease;
         }
-
         .menu-btn:hover {
-            transform: translateX(6px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--rsp-vibrant);
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+            transform: translateX(6px); background: rgba(255, 255, 255, 0.08);
+            border-color: var(--rsp-vibrant); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
         }
-
         .menu-btn:hover::before { width: 10px; }
         .menu-btn i { color: var(--rsp-cyan); transition: transform 0.3s ease; }
         .menu-btn:hover i { transform: translateX(4px); }
 
+        /* Coming Soon Button (Bottom of Home Screen) */
+        .coming-soon-btn {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin-top: 25px; padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px; color: #F8FAFC; text-decoration: none; font-weight: 800; font-size: 1.15rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 0 0 15px rgba(255,255,255,0.05);
+            transition: all 0.35s ease; position: relative; overflow: hidden; width: 100%; cursor: pointer;
+        }
+        .coming-soon-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg); animation: shineSweep 3.5s infinite;
+        }
+        @keyframes shineSweep { 100% { left: 200%; } }
+        .coming-soon-btn:hover {
+            transform: translateY(-4px); background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(6, 182, 212, 0.4); border-color: var(--rsp-cyan);
+        }
+        .coming-soon-btn .small-text { font-size: 0.8rem; font-weight: 500; color: var(--rsp-cyan); margin-top: 4px; letter-spacing: 1px;}
+        .coming-soon-btn i { margin-right: 8px; color: var(--rsp-vibrant); }
+
         /* Screens */
         .screen { display: none; text-align: left; }
         .screen.active { display: block; animation: fadeInScreen 0.4s ease forwards; }
-
-        @keyframes fadeInScreen {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes fadeInScreen { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
         .back-btn {
-            background: none;
-            border: none;
-            color: #60A5FA;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s;
+            background: none; border: none; color: #60A5FA; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+            margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;
         }
         .back-btn:hover { transform: translateX(-4px); }
 
         /* Bright Longitudinal Mode Buttons */
-        .mode-selection {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin-top: 25px;
-        }
-
+        .mode-selection { display: flex; flex-direction: column; gap: 18px; margin-top: 25px; }
         .bright-btn {
-            width: 100%;
-            padding: 22px 20px;
-            border-radius: 20px;
-            border: none;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 800;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%; padding: 22px 20px; border-radius: 20px; border: none; color: white; font-size: 1.1rem;
+            font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center;
+            gap: 12px; transition: all 0.35s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .bright-btn.practice-btn { background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%); }
+        .bright-btn.mistake-btn { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+        .bright-btn:hover { transform: translateY(-4px) scale(1.02); filter: brightness(1.15); box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5); }
+        .badge-count { background: rgba(255, 255, 255, 0.25); padding: 4px 12px; border-radius: 30px; font-size: 0.9rem; font-weight: 800; backdrop-filter: blur(5px); }
+
+        /* Quiz UI (Pure Glassmorphism) */
+        .quiz-box {
+            margin-top: 5px;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        .bright-btn.practice-btn {
-            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
-        }
-
-        .bright-btn.mistake-btn {
-            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-        }
-
-        .bright-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            filter: brightness(1.15);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5);
-        }
-
-        .badge-count {
-            background: rgba(255, 255, 255, 0.25);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 800;
-            backdrop-filter: blur(5px);
-        }
-
-        /* Header Navigation & Skip Button */
-        .quiz-top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
+        .quiz-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .skip-btn {
-            padding: 8px 18px;
-            background: var(--skip-bg);
-            border: 1px solid var(--skip-border);
-            color: var(--skip-text);
-            font-weight: 700;
-            font-size: 0.88rem;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            padding: 8px 18px; background: var(--skip-bg); border: 1px solid var(--skip-border); color: var(--skip-text);
+            font-weight: 700; font-size: 0.88rem; border-radius: 12px; cursor: pointer; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; gap: 6px;
         }
+        .skip-btn:hover { background: var(--skip-border); color: #000; transform: translateY(-2px); }
 
-        .skip-btn:hover {
-            background: var(--skip-border);
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        /* Quiz UI Progress Header */
         .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 700;
-            background: var(--glass-card);
-            padding: 12px 18px;
-            border-radius: 14px;
-            border: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.95rem;
+            color: var(--text-muted); font-weight: 700; background: rgba(255,255,255,0.03); padding: 12px 18px;
+            border-radius: 14px; border: 1px solid var(--glass-border);
         }
 
+        /* Highly Highlighted Question Text */
         .question-text {
-            font-size: 1.18rem;
-            font-weight: 700;
-            margin-bottom: 22px;
-            color: var(--text-main);
-            line-height: 1.6;
+            font-size: 1.25rem; font-weight: 700; margin-bottom: 25px; color: #FFFFFF; line-height: 1.6;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(6, 182, 212, 0.1));
+            padding: 22px; border-radius: 18px; border-left: 6px solid var(--rsp-cyan);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 0 15px rgba(255,255,255,0.05);
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
 
-        .options-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        
+        /* Subtle Options Background */
         .option-item {
-            padding: 16px 20px;
-            background: var(--glass-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.98rem;
-            color: var(--text-main);
-            transition: all 0.25s ease;
+            padding: 18px 22px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; cursor: pointer; font-weight: 600; font-size: 1rem; color: var(--text-main);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
         }
-
         .option-item:hover:not(.disabled) {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--rsp-cyan);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08); border-color: var(--rsp-cyan); transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        /* Option Color States */
+        /* Bright Clicked Options */
         .option-item.correct {
-            background: var(--correct-bg) !important;
-            border-color: var(--correct-border) !important;
-            color: var(--correct-text) !important;
-            font-weight: 700;
+            background: #10B981 !important; /* Bright Emerald Green */
+            border-color: #059669 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.6) !important;
+            font-weight: 800; transform: scale(1.02);
         }
-
         .option-item.wrong {
-            background: var(--wrong-bg) !important;
-            border-color: var(--wrong-border) !important;
-            color: var(--wrong-text) !important;
-            font-weight: 700;
+            background: #EF4444 !important; /* Bright Crimson Red */
+            border-color: #B91C1C !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
+            font-weight: 800; transform: scale(1.02);
         }
 
         .option-item.disabled { cursor: default; }
 
         /* Explanation Box */
         .explanation-box {
-            margin-top: 20px;
-            padding: 16px 20px;
-            background: rgba(6, 182, 212, 0.1);
-            border-left: 5px solid var(--rsp-cyan);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            color: #67E8F9;
-            line-height: 1.5;
-            display: none;
+            margin-top: 20px; padding: 16px 20px; background: rgba(6, 182, 212, 0.15);
+            border-left: 5px solid var(--rsp-cyan); border-radius: 12px; font-size: 0.95rem; color: #A5F3FC;
+            line-height: 1.5; display: none; box-shadow: inset 0 0 10px rgba(6, 182, 212, 0.1);
         }
 
-        .quiz-footer {
-            margin-top: 25px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
+        .quiz-footer { margin-top: 25px; display: flex; justify-content: flex-end; }
         .next-q-btn {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--rsp-vibrant), var(--rsp-cyan));
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-            display: none;
-            transition: all 0.3s ease;
+            padding: 14px 28px; background: linear-gradient(135deg, var(--rsp-vibrant), var(--rsp-cyan)); color: white;
+            border: none; border-radius: 14px; font-weight: 800; font-size: 1rem; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); display: none; transition: all 0.3s ease;
         }
+        .next-q-btn:hover { transform: translateY(-2px) scale(1.05); filter: brightness(1.2); }
 
-        .next-q-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        /* Analytical Result Dashboard Card */
+        /* Analytical Result Dashboard */
         .result-card { text-align: center; padding: 15px 5px; }
-
         .accuracy-ring {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 15px auto;
-            border-radius: 50%;
+            position: relative; width: 140px; height: 140px; margin: 15px auto; border-radius: 50%;
             background: conic-gradient(var(--rsp-cyan) calc(var(--accuracy) * 1%), rgba(255,255,255,0.1) 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
         }
-
-        .accuracy-ring::before {
-            content: '';
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: var(--primary-navy);
-        }
-
-        .accuracy-value {
-            position: relative;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--rsp-cyan);
-        }
-
-        .score-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin: 20px 0;
-        }
-
+        .accuracy-ring::before { content: ''; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: var(--primary-navy); }
+        .accuracy-value { position: relative; font-size: 2rem; font-weight: 800; color: var(--rsp-cyan); }
+        .score-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 20px 0; }
         .stat-card {
-            padding: 15px;
-            border-radius: 16px;
-            background: var(--glass-card);
-            border: 1px solid var(--glass-border);
-            font-weight: 700;
-            text-align: center;
+            padding: 15px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            font-weight: 700; text-align: center; backdrop-filter: blur(10px);
         }
-
-        .stat-card.correct-stat { border-color: var(--correct-border); color: var(--correct-text); }
-        .stat-card.wrong-stat { border-color: var(--wrong-border); color: var(--wrong-text); }
+        .stat-card.correct-stat { border-color: #10B981; color: #10B981; }
+        .stat-card.wrong-stat { border-color: #EF4444; color: #EF4444; }
         .stat-card.skip-stat { border-color: var(--skip-border); color: var(--skip-text); }
         .stat-card.total-stat { border-color: var(--rsp-cyan); color: var(--rsp-cyan); }
-
-        .stat-card .num { font-size: 1.5rem; display: block; margin-bottom: 2px; }
-
-        .result-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 25px;
-        }
+        .stat-card .num { font-size: 1.8rem; display: block; margin-bottom: 2px; }
+        .result-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
     </style>
 </head>
 <body>
@@ -551,7 +350,7 @@
         <!-- Home Screen -->
         <div id="homeScreen" class="screen active">
             <h1 class="animated-title">राष्ट्रिय स्वतन्त्र पार्टी (रास्वपा)</h1>
-            <div class="subtitle">रास्वपाको उम्मेदवार छनोट प्रक्रियामा सहयोग गर्ने शैक्षिक मञ्च </div>
+            <div class="subtitle">RSP - Candidate Club</div>
 
             <!-- Profile Circle (photo.jpg) -->
             <div class="profile-container">
@@ -587,6 +386,14 @@
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
+
+            <!-- Coming Soon / External GitHub Redirect Button -->
+            <!-- PASTE YOUR GITHUB PAGE LINK IN THE HREF BELOW (Currently set to # ) -->
+            <a href="#" target="_blank" class="coming-soon-btn">
+                <span><i class="fas fa-rocket"></i> Coming Soon</span>
+                <span class="small-text">More Knowledge</span>
+            </a>
+
         </div>
 
         <!-- Mode Selection Screen (2 Bright Longitudinal Buttons) -->
@@ -722,7 +529,6 @@
             } catch (e) { }
         }
 
-
         /* -------------------------------------------------------------
            2. FIREWORKS OPENING CEREMONY ANIMATION (One-Time Run)
            ------------------------------------------------------------- */
@@ -751,35 +557,25 @@
                 this.decay = Math.random() * 0.02 + 0.015;
             }
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vy += 0.08;
-                this.alpha -= this.decay;
+                this.x += this.vx; this.y += this.vy; this.vy += 0.08; this.alpha -= this.decay;
             }
             draw() {
-                ctx.save();
-                ctx.globalAlpha = Math.max(0, this.alpha);
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                ctx.restore();
+                ctx.save(); ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.beginPath(); ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = this.color; ctx.fill(); ctx.restore();
             }
         }
 
         function createFirework(x, y) {
             const colors = ['#2563EB', '#06B6D4', '#EF4444', '#F59E0B', '#10B981', '#EC4899'];
             const color = colors[Math.floor(Math.random() * colors.length)];
-            for (let i = 0; i < 35; i++) {
-                particles.push(new Particle(x, y, color));
-            }
+            for (let i = 0; i < 35; i++) { particles.push(new Particle(x, y, color)); }
             playFirecrackerPop();
         }
 
         let lastLaunch = 0;
         function animateFireworks(timestamp) {
             if (!fireworksActive) return;
-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             if (timestamp - lastLaunch > 250) {
@@ -789,15 +585,10 @@
                 );
                 lastLaunch = timestamp;
             }
-
             for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].alpha <= 0) {
-                    particles.splice(i, 1);
-                }
+                particles[i].update(); particles[i].draw();
+                if (particles[i].alpha <= 0) particles.splice(i, 1);
             }
-
             requestAnimationFrame(animateFireworks);
         }
 
@@ -806,12 +597,9 @@
             setTimeout(() => {
                 fireworksActive = false;
                 canvas.style.opacity = '0';
-                setTimeout(() => {
-                    canvas.style.display = 'none';
-                }, 1000);
+                setTimeout(() => canvas.style.display = 'none', 1000);
             }, 3000);
         });
-
 
         /* -------------------------------------------------------------
            3. APP STATE & MISTAKE BANK LOGIC
@@ -842,27 +630,15 @@
             ]
         };
 
-        function getMistakeKey(sec) {
-            return `rsp_mistakes_sec_${sec}`;
-        }
-
-        function getStoredMistakes(sec) {
-            let data = localStorage.getItem(getMistakeKey(sec));
-            return data ? JSON.parse(data) : [];
-        }
-
+        function getMistakeKey(sec) { return `rsp_mistakes_sec_${sec}`; }
+        function getStoredMistakes(sec) { let data = localStorage.getItem(getMistakeKey(sec)); return data ? JSON.parse(data) : []; }
         function storeMistake(sec, qId) {
             let mistakes = getStoredMistakes(sec);
-            if (!mistakes.includes(qId)) {
-                mistakes.push(qId);
-                localStorage.setItem(getMistakeKey(sec), JSON.stringify(mistakes));
-            }
+            if (!mistakes.includes(qId)) { mistakes.push(qId); localStorage.setItem(getMistakeKey(sec), JSON.stringify(mistakes)); }
         }
-
         function removeMistake(sec, qId) {
             let mistakes = getStoredMistakes(sec);
-            mistakes = mistakes.filter(id => id !== qId);
-            localStorage.setItem(getMistakeKey(sec), JSON.stringify(mistakes));
+            mistakes = mistakes.filter(id => id !== qId); localStorage.setItem(getMistakeKey(sec), JSON.stringify(mistakes));
         }
 
         function updateMistakeBadge() {
@@ -873,28 +649,14 @@
         function openSection(sectionNum) {
             initAudio();
             currentSection = sectionNum;
-            const titles = {
-                1: "स्थानीय सरकार सञ्चालन ऐन २०७४",
-                2: "वडा अध्यक्षको जिम्मेवारी",
-                3: "प्रमुख / उपप्रमुखको जिम्मेवारी",
-                4: "नेपालको संविधान २०७२"
-            };
+            const titles = { 1: "स्थानीय सरकार सञ्चालन ऐन २०७४", 2: "वडा अध्यक्षको जिम्मेवारी", 3: "प्रमुख / उपप्रमुखको जिम्मेवारी", 4: "नेपालको संविधान २०७२" };
             document.getElementById('sectionTitle').innerText = titles[sectionNum];
             updateMistakeBadge();
             
             fetch(`data/${sectionNum}.json`)
-                .then(response => {
-                    if (!response.ok) throw new Error("JSON file missing");
-                    return response.json();
-                })
-                .then(data => {
-                    questionsData = data;
-                    switchScreen('modeScreen');
-                })
-                .catch(err => {
-                    questionsData = fallbackQuestions[sectionNum] || fallbackQuestions[1];
-                    switchScreen('modeScreen');
-                });
+                .then(res => { if (!res.ok) throw new Error("JSON file missing"); return res.json(); })
+                .then(data => { questionsData = data; switchScreen('modeScreen'); })
+                .catch(err => { questionsData = fallbackQuestions[sectionNum] || fallbackQuestions[1]; switchScreen('modeScreen'); });
         }
 
         function switchScreen(screenId) {
@@ -902,14 +664,8 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        function goHome() {
-            switchScreen('homeScreen');
-        }
-
-        function backToMode() {
-            updateMistakeBadge();
-            switchScreen('modeScreen');
-        }
+        function goHome() { switchScreen('homeScreen'); }
+        function backToMode() { updateMistakeBadge(); switchScreen('modeScreen'); }
 
         function shuffleArray(array) {
             let arr = [...array];
@@ -921,26 +677,15 @@
         }
 
         function startQuiz(mode) {
-            currentMode = mode;
-            currentIndex = 0;
-            correctCount = 0;
-            wrongCount = 0;
-            skipCount = 0;
-
-            if (mode === 'all') {
-                activeQuestions = shuffleArray(questionsData);
-            } else {
+            currentMode = mode; currentIndex = 0; correctCount = 0; wrongCount = 0; skipCount = 0;
+            if (mode === 'all') { activeQuestions = shuffleArray(questionsData); } 
+            else {
                 let mistakeIds = getStoredMistakes(currentSection);
                 let filtered = questionsData.filter(q => mistakeIds.includes(q.id));
                 activeQuestions = shuffleArray(filtered);
-                
-                if (activeQuestions.length === 0) {
-                    alert("बधाई छ! तपाईँको Mistake Bank मा कुनै प्रश्न बाँकी छैनन्।");
-                    return;
-                }
+                if (activeQuestions.length === 0) { alert("बधाई छ! तपाईँको Mistake Bank मा कुनै प्रश्न बाँकी छैनन्।"); return; }
             }
-            switchScreen('quizScreen');
-            loadQuestion();
+            switchScreen('quizScreen'); loadQuestion();
         }
 
         function loadQuestion() {
@@ -948,10 +693,7 @@
             document.getElementById('nextBtn').style.display = "none";
             document.getElementById('explanationBox').style.display = "none";
 
-            if (currentIndex >= activeQuestions.length) {
-                renderDashboardResults();
-                return;
-            }
+            if (currentIndex >= activeQuestions.length) { renderDashboardResults(); return; }
 
             let q = activeQuestions[currentIndex];
             document.getElementById('quizProgress').innerText = `प्रश्न ${currentIndex + 1} / ${activeQuestions.length}`;
@@ -960,13 +702,9 @@
 
             let optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = "";
-
             q.o.forEach((opt, index) => {
-                let li = document.createElement('li');
-                li.className = 'option-item';
-                li.innerText = opt;
-                li.onclick = () => selectOption(index, q.a, q.e, li);
-                optionsList.appendChild(li);
+                let li = document.createElement('li'); li.className = 'option-item'; li.innerText = opt;
+                li.onclick = () => selectOption(index, q.a, q.e, li); optionsList.appendChild(li);
             });
         }
 
@@ -978,41 +716,27 @@
             items.forEach(item => item.classList.add('disabled'));
 
             if (selectedIndex === correctIndex) {
-                element.classList.add('correct');
-                playCorrectSound();
-                correctCount++;
+                element.classList.add('correct'); playCorrectSound(); correctCount++;
                 removeMistake(currentSection, activeQuestions[currentIndex].id);
             } else {
-                element.classList.add('wrong');
-                items[correctIndex].classList.add('correct');
-                playWrongSound();
-                wrongCount++;
+                element.classList.add('wrong'); items[correctIndex].classList.add('correct');
+                playWrongSound(); wrongCount++;
                 storeMistake(currentSection, activeQuestions[currentIndex].id);
             }
 
             document.getElementById('scoreTracker').innerText = `सही: ${correctCount}`;
-
             if (explanationText) {
                 let expBox = document.getElementById('explanationBox');
                 expBox.innerHTML = `<strong><i class="fas fa-info-circle"></i> स्पष्टीकरण:</strong> ${explanationText}`;
                 expBox.style.display = "block";
             }
-
             document.getElementById('nextBtn').style.display = "inline-block";
         }
 
         function skipQuestion() {
-            if (currentIndex < activeQuestions.length) {
-                skipCount++;
-                currentIndex++;
-                loadQuestion();
-            }
+            if (currentIndex < activeQuestions.length) { skipCount++; currentIndex++; loadQuestion(); }
         }
-
-        function nextQuestion() {
-            currentIndex++;
-            loadQuestion();
-        }
+        function nextQuestion() { currentIndex++; loadQuestion(); }
 
         /* -------------------------------------------------------------
            4. ANALYTICS & DASHBOARD DISPLAY
@@ -1034,20 +758,16 @@
 
                     <div class="score-stats-grid">
                         <div class="stat-card correct-stat">
-                            <span class="num">${correctCount}</span>
-                            सही उत्तर
+                            <span class="num">${correctCount}</span> सही उत्तर
                         </div>
                         <div class="stat-card wrong-stat">
-                            <span class="num">${wrongCount}</span>
-                            गलत उत्तर
+                            <span class="num">${wrongCount}</span> गलत उत्तर
                         </div>
                         <div class="stat-card skip-stat">
-                            <span class="num">${skipCount}</span>
-                            Skipped
+                            <span class="num">${skipCount}</span> Skipped
                         </div>
                         <div class="stat-card total-stat">
-                            <span class="num">${total}</span>
-                            कुल प्रश्न
+                            <span class="num">${total}</span> कुल प्रश्न
                         </div>
                     </div>
 
