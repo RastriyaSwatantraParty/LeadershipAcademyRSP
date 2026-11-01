@@ -350,7 +350,7 @@
         <!-- Home Screen -->
         <div id="homeScreen" class="screen active">
             <h1 class="animated-title">राष्ट्रिय स्वतन्त्र पार्टी (रास्वपा)</h1>
-            <div class="subtitle">RSP - Candidate Club</div>
+            <div class="subtitle">रास्वपाको उम्मेदवार छनोट प्रक्रियामा सहयोग गर्ने शैक्षिक मञ्च</div>
 
             <!-- Profile Circle (photo.jpg) -->
             <div class="profile-container">
@@ -367,8 +367,12 @@
                 </a>
             </div>
 
-            <!-- 4 Main Menu Buttons -->
+            <!-- 5 Main Menu Buttons -->
             <div class="menu-grid">
+                <button class="menu-btn" onclick="openSection(0)">
+                    <span> Rapid Quiz</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
                 <button class="menu-btn" onclick="openSection(1)">
                     <span>स्थानीय सरकार सञ्चालन ऐन २०७४</span>
                     <i class="fas fa-chevron-right"></i>
@@ -649,7 +653,7 @@
         function openSection(sectionNum) {
             initAudio();
             currentSection = sectionNum;
-            const titles = { 1: "स्थानीय सरकार सञ्चालन ऐन २०७४", 2: "वडा अध्यक्षको जिम्मेवारी", 3: "प्रमुख / उपप्रमुखको जिम्मेवारी", 4: "नेपालको संविधान २०७२" };
+            const titles = { 0: "Rapid Quiz", 1: "स्थानीय सरकार सञ्चालन ऐन २०७४", 2: "वडा अध्यक्षको जिम्मेवारी", 3: "प्रमुख / उपप्रमुखको जिम्मेवारी", 4: "नेपालको संविधान २०७२" };
             document.getElementById('sectionTitle').innerText = titles[sectionNum];
             updateMistakeBadge();
             
