@@ -367,7 +367,7 @@
                 </a>
             </div>
 
-            <!-- 7 Main Menu Buttons -->
+            <!-- 8 Main Menu Buttons -->
             <div class="menu-grid">
                 <button class="menu-btn" onclick="openSection(0)">
                     <span> Rapid Quiz</span>
@@ -395,6 +395,10 @@
                 </button>
                 <button class="menu-btn" onclick="openSection(6)">
                     <span>संविधान भाग २</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="menu-btn" onclick="openSection(7)">
+                    <span>स्थानीय व्यवस्थापिका र कार्यपालिका</span>
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -661,7 +665,7 @@
         function openSection(sectionNum) {
             initAudio();
             currentSection = sectionNum;
-            const titles = { 0: "Rapid Quiz", 1: "स्थानीय सरकार सञ्चालन ऐन २०७४", 2: "वडा अध्यक्षको जिम्मेवारी", 3: "प्रमुख / उपप्रमुखको जिम्मेवारी", 4: "नेपालको संविधान २०७२", 5: "खरिद ऐन - उपभोक्त समिति", 6: "संविधान भाग २" };
+            const titles = { 0: "Rapid Quiz", 1: "स्थानीय सरकार सञ्चालन ऐन २०७४", 2: "वडा अध्यक्षको जिम्मेवारी", 3: "प्रमुख / उपप्रमुखको जिम्मेवारी", 4: "नेपालको संविधान २०७२", 5: "खरिद ऐन - उपभोक्त समिति", 6: "संविधान भाग २", 7: "स्थानीय व्यवस्थापिका र कार्यपालिका" };
             document.getElementById('sectionTitle').innerText = titles[sectionNum];
             updateMistakeBadge();
             
