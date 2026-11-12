@@ -890,15 +890,18 @@
             localStorage.setItem(USER_POS_KEY, posVal);
             updateUserGreeting(nameVal, posVal);
 
-            // 2. Send to Google Sheet via Apps Script
+                        // 2. Send to Google Sheet via Apps Script (CORS Bypassed)
             if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "PASTE_YOUR_GOOGLE_SHEET_APP_SCRIPT_URL_HERE") {
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'text/plain;charset=utf-8' 
+                    },
                     body: JSON.stringify({ name: nameVal, position: posVal })
-                }).catch(err => console.log("Sheet sync:", err));
+                }).catch(err => console.log("Sheet sync error:", err));
             }
+
 
             setTimeout(() => {
                 playCorrectSound();
