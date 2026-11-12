@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF.js Library for Book Style PDF Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     
     <style>
         :root {
@@ -86,7 +88,7 @@
         /* Master Glassmorphic Container with Background Rectangular Image (rsp.jpg) */
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 680px;
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
@@ -142,13 +144,95 @@
             color: var(--rsp-cyan);
             margin-top: 6px;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 1.5px;
             opacity: 0.9;
         }
 
-        /* Profile Photo */
+        /* ---------------- 1. LOGIN SCREEN STYLES ---------------- */
+        .login-animated-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin: 15px 0 25px;
+            background: linear-gradient(90deg, #38BDF8, #F43F5E, #FBBF24, #10B981, #38BDF8);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowText 5s linear infinite;
+        }
+
+        @keyframes rainbowText {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #93C5FD;
+            margin-bottom: 8px;
+        }
+
+        .login-input, .login-select {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            border-radius: 16px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus, .login-select:focus {
+            border-color: var(--rsp-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+        }
+
+        .login-select option {
+            background: #0F172A;
+            color: #FFFFFF;
+            padding: 12px;
+        }
+
+        .login-submit-btn {
+            width: 100%;
+            padding: 18px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-submit-btn:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.6);
+        }
+
+        /* ---------------- 2. USER COMPLIMENT NAME DISPLAY ---------------- */
         .profile-container {
-            margin: 22px auto;
+            margin: 20px auto 14px;
             position: relative;
             width: 120px;
             height: 120px;
@@ -163,6 +247,195 @@
             100% { transform: translateY(-6px); box-shadow: 0 0 35px rgba(6, 182, 212, 0.6); }
         }
         .profile-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background: #111; }
+
+        .user-compliment-box {
+            margin: 10px auto 18px;
+            padding: 14px 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.1);
+            text-align: center;
+            animation: pulseCompliment 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseCompliment {
+            0% { transform: scale(1); border-color: rgba(56, 189, 248, 0.3); }
+            100% { transform: scale(1.02); border-color: rgba(244, 63, 94, 0.5); }
+        }
+
+        .user-animated-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #FBBF24, #38BDF8, #F472B6, #4ADE80, #FBBF24);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowText 4s linear infinite;
+            letter-spacing: 0.5px;
+        }
+
+        .user-animated-pos {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #EF4444, #2563EB);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ---------------- 3. STORY BOOKS BIG RECTANGULAR BUTTON ---------------- */
+        .story-books-btn {
+            width: 100%;
+            padding: 20px 24px;
+            margin-bottom: 22px;
+            border-radius: 20px;
+            border: 2px solid rgba(251, 191, 36, 0.5);
+            background: linear-gradient(135deg, #F59E0B 0%, #EA580C 50%, #DC2626 100%);
+            color: #FFFFFF;
+            font-size: 1.25rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 12px 30px rgba(234, 88, 12, 0.45);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-books-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-20deg);
+            animation: shineSweep 3s infinite;
+        }
+
+        .story-books-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 35px rgba(245, 158, 11, 0.65);
+        }
+
+        /* ---------------- 4. 3D BOOK READER STYLES ---------------- */
+        .book-reader-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .book-stage {
+            position: relative;
+            width: 100%;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0 18px;
+            perspective: 1200px;
+        }
+
+        /* Open Book Container */
+        .book-spread {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            background: #FDFBF7;
+            border-radius: 12px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 0 4px #334155;
+            overflow: hidden;
+            position: relative;
+            max-width: 100%;
+            transition: transform 0.4s ease;
+        }
+
+        /* Center Book Spine Crease */
+        .book-spread.two-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 24px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, 
+                rgba(0,0,0,0.02) 0%, 
+                rgba(0,0,0,0.22) 45%, 
+                rgba(0,0,0,0.35) 50%, 
+                rgba(255,255,255,0.15) 55%, 
+                rgba(0,0,0,0.02) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .book-page-slot {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFDF9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-page-slot canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Bright Small Left & Right Arrow Buttons */
+        .book-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            background: linear-gradient(135deg, #FF3366, #FF6B00);
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.8);
+            transition: all 0.25s ease;
+        }
+
+        .book-nav-arrow:hover:not(:disabled) {
+            transform: translateY(-50%) scale(1.15);
+            background: linear-gradient(135deg, #06B6D4, #2563EB);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.9);
+        }
+
+        .book-nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .book-nav-arrow.left-arrow { left: -10px; }
+        .book-nav-arrow.right-arrow { right: -10px; }
+
+        .book-status-bar {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--rsp-cyan);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
 
         /* Social Links */
         .social-quick-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 25px; }
@@ -195,7 +468,7 @@
         .menu-btn i { color: var(--rsp-cyan); transition: transform 0.3s ease; }
         .menu-btn:hover i { transform: translateX(4px); }
 
-        /* Coming Soon Button (Bottom of Home Screen) */
+        /* Coming Soon Button */
         .coming-soon-btn {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             margin-top: 25px; padding: 16px 20px;
@@ -288,14 +561,14 @@
 
         /* Bright Clicked Options */
         .option-item.correct {
-            background: #10B981 !important; /* Bright Emerald Green */
+            background: #10B981 !important;
             border-color: #059669 !important;
             color: #FFFFFF !important;
             box-shadow: 0 0 25px rgba(16, 185, 129, 0.6) !important;
             font-weight: 800; transform: scale(1.02);
         }
         .option-item.wrong {
-            background: #EF4444 !important; /* Bright Crimson Red */
+            background: #EF4444 !important;
             border-color: #B91C1C !important;
             color: #FFFFFF !important;
             box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
@@ -347,8 +620,46 @@
     <canvas id="fireworksCanvas"></canvas>
 
     <div class="container">
-        <!-- Home Screen -->
-        <div id="homeScreen" class="screen active">
+
+        <!-- =========================================================
+             1. LOGIN SCREEN (Shown only if not saved in Browser)
+             ========================================================= -->
+        <div id="loginScreen" class="screen" style="text-align: center;">
+            <h1 class="animated-title">राष्ट्रिय स्वतन्त्र पार्टी (रास्वपा)</h1>
+            <div class="profile-container">
+                <img src="photo.jpg" alt="RSP Logo" onerror="this.src='https://via.placeholder.com/120/0F172A/FFFFFF?text=RSP'">
+            </div>
+            
+            <h2 class="login-animated-title">आफ्नो नाम प्रविष्ट गर्नुहोस् र पद चयन गर्नुहोस्</h2>
+
+            <form class="login-form" onsubmit="handleLoginSubmit(event)">
+                <div class="input-group">
+                    <label for="userNameInput"><i class="fas fa-user"></i> पूरा नाम (Full Name)</label>
+                    <input type="text" id="userNameInput" class="login-input" placeholder="आफ्नो पूरा नाम लेख्नुहोस्..." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="userPositionSelect"><i class="fas fa-award"></i> पद चयन गर्नुहोस् (Select Position)</label>
+                    <select id="userPositionSelect" class="login-select" required>
+                        <option value="" disabled selected>Select Position</option>
+                        <option value="पालिका प्रमुख">पालिका प्रमुख</option>
+                        <option value="पालिका उपप्रमुख">पालिका उपप्रमुख</option>
+                        <option value="वडा अध्यक्ष">वडा अध्यक्ष</option>
+                        <option value="वडा सदस्य">वडा सदस्य</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="loginSubmitBtn" class="login-submit-btn">
+                    <span>प्रवेश गर्नुहोस् (Continue)</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- =========================================================
+             2. HOME SCREEN
+             ========================================================= -->
+        <div id="homeScreen" class="screen" style="text-align: center;">
             <h1 class="animated-title">राष्ट्रिय स्वतन्त्र पार्टी (रास्वपा)</h1>
             <div class="subtitle">रास्वपाको उम्मेदवार छनोट प्रक्रियामा सहयोग गर्ने शैक्षिक मञ्च</div>
 
@@ -356,6 +667,18 @@
             <div class="profile-container">
                 <img src="photo.jpg" alt="RSP Logo" onerror="this.src='https://via.placeholder.com/120/0F172A/FFFFFF?text=RSP'">
             </div>
+
+            <!-- User Name & Position Compliment Display -->
+            <div class="user-compliment-box" id="userComplimentBox">
+                <div class="user-animated-name" id="displayUserName">स्वागतम्!</div>
+                <div class="user-animated-pos" id="displayUserPos">उम्मेदवार</div>
+            </div>
+
+            <!-- BIG RECTANGULAR "Story Books" BUTTON -->
+            <button class="story-books-btn" onclick="openStoryBooksScreen()">
+                <i class="fas fa-book-open"></i>
+                <span>Story Books</span>
+            </button>
 
             <!-- Social Media Buttons -->
             <div class="social-quick-links">
@@ -370,7 +693,7 @@
             <!-- 8 Main Menu Buttons -->
             <div class="menu-grid">
                 <button class="menu-btn" onclick="openSection(0)">
-                    <span> Rapid Quiz</span>
+                    <span>Rapid Quiz</span>
                     <i class="fas fa-chevron-right"></i>
                 </button>
                 <button class="menu-btn" onclick="openSection(1)">
@@ -409,10 +732,68 @@
                 <span><i class="fas fa-rocket"></i> Coming Soon</span>
                 <span class="small-text">More Knowledge</span>
             </a>
-
         </div>
 
-        <!-- Mode Selection Screen (2 Bright Longitudinal Buttons) -->
+        <!-- =========================================================
+             3. STORY BOOKS LIST SCREEN
+             ========================================================= -->
+        <div id="storyBooksScreen" class="screen">
+            <button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> गृहपृष्ठमा फर्कनुहोस्</button>
+            <h2 style="color: var(--text-main); margin-bottom: 6px; font-size: 1.4rem;"><i class="fas fa-book-reader" style="color:#FBBF24;"></i> Story Books</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">अध्ययन गर्न चाहनुभएको पुस्तक छान्नुहोस्:</p>
+
+            <!-- =========================================================================
+                 STORY BOOKS TOPICS AREA (यहाँ तल नयाँ बटन थप्नुहोस्)
+                 तपाईँले खाली <button class="story-topic-item">नाम</button> मात्र थप्दा 
+                 यसले आफैँ 1. नाम, 2. नाम राख्नेछ र pdf/1.pdf, pdf/2.pdf सँग जोड्नेछ!
+                 ========================================================================= -->
+            <div class="menu-grid" id="storyTopicsContainer">
+                <button class="story-topic-item">धारा १ र २</button>
+                <button class="story-topic-item">सन्निकटताको सिद्धान्त</button>
+                <button class="story-topic-item">मौलिक अधिकारको स्थानीयकरण</button>
+                <!-- भविष्यमा अरु थप्न यही लाइन मुनि <button class="story-topic-item">नयाँ नाम</button> थप्नुहोस् -->
+            </div>
+        </div>
+
+        <!-- =========================================================
+             4. BOOK READER SCREEN (Landscape Split into 2 Portrait Pages)
+             ========================================================= -->
+        <div id="bookReaderScreen" class="screen">
+            <button class="back-btn" onclick="openStoryBooksScreen()"><i class="fas fa-arrow-left"></i> पुस्तक सूचीमा फर्कनुहोस्</button>
+            <h3 id="currentBookTitle" style="color: var(--text-main); font-size: 1.2rem; text-align: center; margin-bottom: 8px;">पुस्तक</h3>
+
+            <div class="book-reader-wrapper">
+                <div class="book-stage">
+                    <!-- Bright Left Arrow -->
+                    <button class="book-nav-arrow left-arrow" id="prevPageBtn" onclick="changeBookSpread(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <!-- Book Spread Container -->
+                    <div class="book-spread" id="bookSpreadContainer">
+                        <div class="book-page-slot" id="leftPageSlot">
+                            <canvas id="leftPageCanvas"></canvas>
+                        </div>
+                        <div class="book-page-slot" id="rightPageSlot">
+                            <canvas id="rightPageCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Bright Right Arrow -->
+                    <button class="book-nav-arrow right-arrow" id="nextPageBtn" onclick="changeBookSpread(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="book-status-bar" id="bookPageIndicator">
+                    Loading Book...
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             5. MODE SELECTION SCREEN
+             ========================================================= -->
         <div id="modeScreen" class="screen">
             <button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> गृहपृष्ठमा फर्कनुहोस्</button>
             <h2 id="sectionTitle" style="color: var(--text-main); margin-bottom: 6px; font-size: 1.3rem;">विभाग</h2>
@@ -429,7 +810,9 @@
             </div>
         </div>
 
-        <!-- Quiz Screen -->
+        <!-- =========================================================
+             6. QUIZ SCREEN
+             ========================================================= -->
         <div id="quizScreen" class="screen">
             <div class="quiz-top-bar">
                 <button class="back-btn" style="margin-bottom:0;" onclick="backToMode()"><i class="fas fa-arrow-left"></i> फर्कनुहोस्</button>
@@ -454,6 +837,199 @@
     </div>
 
     <script>
+        /* =============================================================
+           GOOGLE SHEETS APP SCRIPT URL (यहाँ आफ्नो Web App URL पेस्ट गर्नुहोस्)
+           ============================================================= */
+        const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_SHEET_APP_SCRIPT_URL_HERE";
+
+        // Configure PDF.js worker
+        if (window['pdfjsLib']) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        /* -------------------------------------------------------------
+           0. LOGIN & PERSISTENT USER PROFILE LOGIC
+           ------------------------------------------------------------- */
+        const USER_NAME_KEY = 'rsp_candidate_user_name';
+        const USER_POS_KEY = 'rsp_candidate_user_position';
+
+        function checkUserSession() {
+            const savedName = localStorage.getItem(USER_NAME_KEY);
+            const savedPos = localStorage.getItem(USER_POS_KEY);
+
+            if (savedName && savedPos) {
+                // Already logged in before -> Go directly to Home Screen without asking again
+                updateUserGreeting(savedName, savedPos);
+                switchScreen('homeScreen');
+            } else {
+                // First time user -> Show Login Screen
+                switchScreen('loginScreen');
+            }
+        }
+
+        function updateUserGreeting(name, pos) {
+            document.getElementById('displayUserName').innerText = `✨ ${name} ✨`;
+            document.getElementById('displayUserPos').innerText = `पद: ${pos}`;
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            initAudio();
+
+            const nameVal = document.getElementById('userNameInput').value.trim();
+            const posVal = document.getElementById('userPositionSelect').value;
+
+            if (!nameVal || !posVal) return;
+
+            const btn = document.getElementById('loginSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> सुरक्षित हुँदैछ...`;
+
+            // 1. Save in Browser LocalStorage so it never asks again
+            localStorage.setItem(USER_NAME_KEY, nameVal);
+            localStorage.setItem(USER_POS_KEY, posVal);
+            updateUserGreeting(nameVal, posVal);
+
+            // 2. Send to Google Sheet via Apps Script
+            if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "PASTE_YOUR_GOOGLE_SHEET_APP_SCRIPT_URL_HERE") {
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: nameVal, position: posVal })
+                }).catch(err => console.log("Sheet sync:", err));
+            }
+
+            setTimeout(() => {
+                playCorrectSound();
+                switchScreen('homeScreen');
+            }, 400);
+        }
+
+        /* -------------------------------------------------------------
+           STORY BOOKS AUTO-NUMBERING & 3D BOOK PDF READER LOGIC
+           ------------------------------------------------------------- */
+        let currentPdfDoc = null;
+        let currentPdfPageNum = 1;
+        let totalPdfPages = 1;
+
+        function initStoryBookButtons() {
+            const items = document.querySelectorAll('#storyTopicsContainer .story-topic-item');
+            items.forEach((btn, idx) => {
+                const bookNumber = idx + 1;
+                const rawTitle = btn.getAttribute('data-raw-title') || btn.innerText.trim();
+                btn.setAttribute('data-raw-title', rawTitle);
+                btn.className = 'menu-btn';
+                btn.innerHTML = `
+                    <span>${bookNumber}. ${rawTitle}</span>
+                    <i class="fas fa-book-open"></i>
+                `;
+                btn.onclick = () => openStoryBookPdf(bookNumber, `${bookNumber}. ${rawTitle}`);
+            });
+        }
+
+        function openStoryBooksScreen() {
+            initAudio();
+            initStoryBookButtons();
+            switchScreen('storyBooksScreen');
+        }
+
+        function openStoryBookPdf(bookNumber, title) {
+            document.getElementById('currentBookTitle').innerText = title;
+            document.getElementById('bookPageIndicator').innerText = "किताब लोड हुँदैछ...";
+            switchScreen('bookReaderScreen');
+
+            const pdfUrl = `pdf/${bookNumber}.pdf`;
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
+                currentPdfDoc = pdfDoc;
+                totalPdfPages = pdfDoc.numPages;
+                currentPdfPageNum = 1; // Start at Page 1 (Front Cover on right half)
+                renderBookSpread();
+            }).catch(err => {
+                document.getElementById('bookPageIndicator').innerText = `pdf/${bookNumber}.pdf फेला परेन! कृपया pdf फोल्डरमा फाइल अपलोड गर्नुहोस्।`;
+                clearBookCanvases();
+            });
+        }
+
+        function clearBookCanvases() {
+            const lCanvas = document.getElementById('leftPageCanvas');
+            const rCanvas = document.getElementById('rightPageCanvas');
+            lCanvas.width = 0; lCanvas.height = 0;
+            rCanvas.width = 0; rCanvas.height = 0;
+        }
+
+        function renderBookSpread() {
+            if (!currentPdfDoc) return;
+
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            prevBtn.disabled = (currentPdfPageNum <= 1);
+            nextBtn.disabled = (currentPdfPageNum >= totalPdfPages);
+
+            currentPdfDoc.getPage(currentPdfPageNum).then(page => {
+                const scale = 2.0;
+                const viewport = page.getViewport({ scale: scale });
+
+                // Offscreen full landscape canvas
+                const tempCanvas = document.createElement('canvas');
+                const tempCtx = tempCanvas.getContext('2d');
+                tempCanvas.width = viewport.width;
+                tempCanvas.height = viewport.height;
+
+                page.render({ canvasContext: tempCtx, viewport: viewport }).promise.then(() => {
+                    const halfWidth = viewport.width / 2;
+                    const fullHeight = viewport.height;
+
+                    const leftSlot = document.getElementById('leftPageSlot');
+                    const rightSlot = document.getElementById('rightPageSlot');
+                    const leftCanvas = document.getElementById('leftPageCanvas');
+                    const rightCanvas = document.getElementById('rightPageCanvas');
+                    const spreadBox = document.getElementById('bookSpreadContainer');
+
+                    if (currentPdfPageNum === 1) {
+                        // First Landscape Page: Left half is empty/back cover, Right half is FRONT COVER
+                        spreadBox.classList.remove('two-page');
+                        leftSlot.style.display = 'none';
+                        rightSlot.style.display = 'flex';
+
+                        rightCanvas.width = halfWidth;
+                        rightCanvas.height = fullHeight;
+                        const rCtx = rightCanvas.getContext('2d');
+                        rCtx.drawImage(tempCanvas, halfWidth, 0, halfWidth, fullHeight, 0, 0, halfWidth, fullHeight);
+
+                        document.getElementById('bookPageIndicator').innerText = `Front Cover (पृष्ठ १ / ${totalPdfPages})`;
+                    } else {
+                        // Subsequent Landscape Pages: Show Left portrait page on Left & Right portrait page on Right
+                        spreadBox.classList.add('two-page');
+                        leftSlot.style.display = 'flex';
+                        rightSlot.style.display = 'flex';
+
+                        leftCanvas.width = halfWidth;
+                        leftCanvas.height = fullHeight;
+                        const lCtx = leftCanvas.getContext('2d');
+                        lCtx.drawImage(tempCanvas, 0, 0, halfWidth, fullHeight, 0, 0, halfWidth, fullHeight);
+
+                        rightCanvas.width = halfWidth;
+                        rightCanvas.height = fullHeight;
+                        const rCtx = rightCanvas.getContext('2d');
+                        rCtx.drawImage(tempCanvas, halfWidth, 0, halfWidth, fullHeight, 0, 0, halfWidth, fullHeight);
+
+                        document.getElementById('bookPageIndicator').innerText = `Book Spread: पृष्ठ ${currentPdfPageNum} / ${totalPdfPages}`;
+                    }
+                });
+            });
+        }
+
+        function changeBookSpread(direction) {
+            const nextNum = currentPdfPageNum + direction;
+            if (nextNum >= 1 && nextNum <= totalPdfPages) {
+                currentPdfPageNum = nextNum;
+                playCorrectSound();
+                renderBookSpread();
+            }
+        }
+
         /* -------------------------------------------------------------
            1. WEB AUDIO API SYNTHESIZER
            ------------------------------------------------------------- */
@@ -609,6 +1185,8 @@
         }
 
         window.addEventListener('load', () => {
+            checkUserSession();
+            initStoryBookButtons();
             requestAnimationFrame(animateFireworks);
             setTimeout(() => {
                 fireworksActive = false;
@@ -701,7 +1279,24 @@
                 activeQuestions = shuffleArray(filtered);
                 if (activeQuestions.length === 0) { alert("बधाई छ! तपाईँको Mistake Bank मा कुनै प्रश्न बाँकी छैनन्।"); return; }
             }
-            switchScreen('quizScreen'); loadQuestion();
+            switchScreen('quizScreen');
+            resetQuizBoxDOM();
+            loadQuestion();
+        }
+
+        function resetQuizBoxDOM() {
+            document.getElementById('quizBoxContent').innerHTML = `
+                <div class="progress-header">
+                    <span id="quizProgress">प्रश्न १ / १०</span>
+                    <span id="scoreTracker" style="color: var(--rsp-cyan);">सही: 0</span>
+                </div>
+                <div class="question-text" id="questionText">प्रश्न लोड हुँदैछ...</div>
+                <ul class="options-list" id="optionsList"></ul>
+                <div class="explanation-box" id="explanationBox"></div>
+                <div class="quiz-footer">
+                    <button class="next-q-btn" id="nextBtn" onclick="nextQuestion()">अर्को प्रश्न <i class="fas fa-arrow-right"></i></button>
+                </div>
+            `;
         }
 
         function loadQuestion() {
